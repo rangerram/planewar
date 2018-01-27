@@ -1,0 +1,48 @@
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+
+namespace 飞机大站
+{
+    public partial class Form1 : Form
+    {
+        public Form1()
+        {
+            InitializeComponent();
+            intialgame();
+        }
+
+        //开始在窗体中对游戏进行初始化
+        public void intialgame()
+        {
+            singleobject.getsingle().addobject(new background(0, -750, 5));
+        }
+
+        private void Form1_Paint(object sender, PaintEventArgs e)
+        {
+            singleobject.getsingle().Draw(e.Graphics);
+        }
+
+        private void timer1_Tick(object sender, EventArgs e)
+        { 
+        //设置每隔多少毫秒重新绘制窗体背景图像
+            this.Invalidate(); 
+        }
+
+        
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            //利用双缓冲区解决闪烁问题
+            this.SetStyle(ControlStyles.OptimizedDoubleBuffer, true);
+            this.SetStyle(ControlStyles.AllPaintingInWmPaint, true);
+            this.SetStyle(ControlStyles.UserPaint, true);
+        }
+    }
+}  
+ 
